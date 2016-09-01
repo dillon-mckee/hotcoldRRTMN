@@ -62,7 +62,7 @@ var SAVE_FEWEST_GUESSES_ERROR= 'SAVE_FEWEST_GUESSES_ERROR';
 var saveFewestGuessesError = function(repository, error) {
     return {
         type: SAVE_FEWEST_GUESSES_ERROR,
-        repository: userNum
+        repository: userNum,
         error: error
     };
 };
@@ -72,9 +72,9 @@ var saveFewestGuessesError = function(repository, error) {
 
 
 
-var fetchFewestGuesses = function(repository) {
+var fetchFewestGuesses = function(userNum) {
     return function(dispatch) {
-        var url = 'https://api.github.com/repos/' + repository;
+        var url = 'localhost:8080/fewest-guesses' + userNum;
         return fetch(url).then(function(response) {
             if (response.state < 200 || response.status >= 300) {
                 var error = new Error(response.statusText)

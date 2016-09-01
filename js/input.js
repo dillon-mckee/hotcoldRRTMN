@@ -15,9 +15,10 @@ var InputContainer = React.createClass({
       event.preventDefault();
         var userNum = parseInt(this.refs.userInput.value);
         this.props.dispatch(actions.makeGuess(userNum));
-        this.props.dispatch(
-            actions.fetchDescription(this.props.repository.name)
-        );
+        // console.log(this.props.guessCount);
+        // this.props.dispatch(
+        //     actions.fetchDescription(this.props.guessCount)
+        // );
         this.refs.userInput.value = null;
     },
 
@@ -35,9 +36,9 @@ var InputContainer = React.createClass({
 var Container = connect()(InputContainer);
 
 /** Exports the InputContainer that has been connected with the state */
-//module.exports = Container;
+module.exports = Container;
 
-module.exports = {
-  input: InputContainer,
-  container: Container
-}
+// module.exports = {
+//   input: InputContainer,
+//   container: Container
+// }

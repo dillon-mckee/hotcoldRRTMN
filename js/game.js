@@ -2,8 +2,8 @@
 var React = require('react');
 var connect = require('react-redux').connect;
 
-var InputContainer = require('./input').input;
-var NewGameContainer = require('./newgame').newGame;
+var InputContainer = require('./input');
+var NewGameContainer = require('./newgame');
 
 /**
 * Game field constructor
@@ -13,6 +13,7 @@ var NewGameContainer = require('./newgame').newGame;
 * Selects whether to display a New Game option if the current game has been won
 */
 var Game = function(props) {
+
   return(
        <div className="gameField"><div className="numHotness">Rating: {props.numHotness}</div>
       <div className="guessCount">Number of guesses: {props.guessCount}</div>
@@ -39,9 +40,9 @@ var Container = connect(mapStateToProps)(Game);
 
 
 /** Exports the Game that has been connected with the state */
-//module.exports = Container;
+module.exports = Container;
 
-module.exports = {
-  game: Game,
-  container: Container
-}
+// module.exports = {
+//   game: Game,
+//   container: Container
+// }

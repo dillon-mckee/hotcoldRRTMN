@@ -1,12 +1,8 @@
 var mongoose = require('mongoose');
 
 var GameSchema = new mongoose.Schema ({
-    gameId: {
-        type: Number,
-        required: true
-    },
     guesses: {
-        type: Array,
+        type: Number,
         required: true
     }
 });

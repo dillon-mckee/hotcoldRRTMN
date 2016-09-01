@@ -7,7 +7,7 @@
     "serve": "http-server build/",
     "mkdir": "mkdir -p build",
     "build": "npm run clean && npm run mkdir && npm run build:js && npm run build:html && npm run serve",
-    "watch": "npm run watch:html & npm run watch:js",
+    "watch": "npm run watch:html & npm run watch:js & npm run serve",
     "clean": "rm -rf build",
     "test": "mocha --compilers js:babel-register test/*.js*",
     "build:html": "npm run clean:html && cp index.html build/",

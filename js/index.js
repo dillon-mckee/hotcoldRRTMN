@@ -4,7 +4,7 @@ var ReactDOM = require('react-dom');
 var Provider = require('react-redux').Provider;
 
 var store = require('./store');
-var Game = require('./game').container;
+var Game = require('./game');
 
 /** Renders the game using data from the store */
 document.addEventListener('DOMContentLoaded', function() {

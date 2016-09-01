@@ -77,24 +77,23 @@ var gameController = function(state, action) {
       return newState;
     };
 
-    if (action.type === actions.START_NEWGAME){
-      var newRandNum = parseInt(Math.random() * (100) + 1)
-      var newGameState = update(initialGameState, {
-        randNum: {$set: newRandNum}
-      })
+    // if (action.type === actions.START_NEWGAME){
+    //   var newRandNum = parseInt(Math.random() * (100) + 1)
+    //   var newGameState = update(initialGameState, {
+    //     randNum: {$set: newRandNum}
+    //   })
 
-      return newGameState;
-    };
+    //   return newGameState;
+    // };
 
-    if (action.type === actions.FETCH_FEWEST_GUESSES) {
+    // if (action.type === actions.FETCH_FEWEST_GUESSES) {
 
-     }
-    if (action.type === actions.FETCH_FEWEST_GUESSES_ERROR) {
+    //  }
+    // if (action.type === actions.FETCH_FEWEST_GUESSES_ERROR) {
 
-     }
+    //  }
 
      return state;
- };
 };
 
 /** Exports gameController */
