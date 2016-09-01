@@ -18,8 +18,11 @@ var Game = function(props) {
        <div className="gameField"><div className="numHotness">Rating: {props.numHotness}</div>
       <div className="guessCount">Number of guesses: {props.guessCount}</div>
       <div className="guessSet">Your guesses so far: {props.guessSet.toString()}</div>
-     {props.numHotness == 'You win!' ? <NewGameContainer /> : <InputContainer />}
-     </div> )}
+     {props.numHotness == 'You win!' ? <NewGameContainer /> : <InputContainer guessCount={props.guessCount}/>}
+     </div>
+     <div>props.fewestGuesses</div>
+      )
+}
 
 /**
 * Map State to Props
@@ -31,7 +34,8 @@ var mapStateToProps = function(state, props) {
       randNum: state.randNum,
       numHotness: state.numHotness,
       guessCount: state.guessCount,
-      guessSet: state.guessSet
+      guessSet: state.guessSet,
+      fewestGuesses: state.fewestGuesses
     };
 };
 

@@ -9,7 +9,8 @@ var initialGameState = {
   myNum: 0,
   numHotness: '',
   guessCount: 0,
-  guessSet: []
+  guessSet: [],
+  fewestGuesses: 101
 };
 
 /**
@@ -77,21 +78,34 @@ var gameController = function(state, action) {
       return newState;
     };
 
-    // if (action.type === actions.START_NEWGAME){
-    //   var newRandNum = parseInt(Math.random() * (100) + 1)
-    //   var newGameState = update(initialGameState, {
-    //     randNum: {$set: newRandNum}
-    //   })
+    if (action.type === actions.START_NEWGAME){
+      var newRandNum = parseInt(Math.random() * (100) + 1)
+      var newGameState = update(initialGameState, {
+        randNum: {$set: newRandNum}
+      })
 
-    //   return newGameState;
-    // };
+      return newGameState;
+    };
 
-    // if (action.type === actions.FETCH_FEWEST_GUESSES) {
+    if (action.type === actions.FETCH_FEWEST_GUESSES) {
 
-    //  }
-    // if (action.type === actions.FETCH_FEWEST_GUESSES_ERROR) {
+     }
+    if (action.type === actions.FETCH_FEWEST_GUESSES_ERROR) {
 
-    //  }
+     }
+
+    if (action.type === actions.SAVE_FEWEST_GUESSES) {
+      var newGuessCount = update(state,
+        guessCount: {$set: guessCounter}
+        );
+
+      return newGuessCount;
+
+     }
+    if (action.type === actions.SAVE_FEWEST_GUESSES_ERROR) {
+      throw new Error('Couldn\'t make connection with server');
+
+     }
 
      return state;
 };

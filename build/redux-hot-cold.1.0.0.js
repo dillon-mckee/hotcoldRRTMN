@@ -23099,21 +23099,17 @@
 	    return newState;
 	  };
 	
-	  // if (action.type === actions.START_NEWGAME){
-	  //   var newRandNum = parseInt(Math.random() * (100) + 1)
-	  //   var newGameState = update(initialGameState, {
-	  //     randNum: {$set: newRandNum}
-	  //   })
+	  if (action.type === actions.START_NEWGAME) {
+	    var newRandNum = parseInt(Math.random() * 100 + 1);
+	    var newGameState = update(initialGameState, {
+	      randNum: { $set: newRandNum }
+	    });
 	
-	  //   return newGameState;
-	  // };
+	    return newGameState;
+	  };
 	
-	  // if (action.type === actions.FETCH_FEWEST_GUESSES) {
-	
-	  //  }
-	  // if (action.type === actions.FETCH_FEWEST_GUESSES_ERROR) {
-	
-	  //  }
+	  if (action.type === actions.FETCH_FEWEST_GUESSES) {}
+	  if (action.type === actions.FETCH_FEWEST_GUESSES_ERROR) {}
 	
 	  return state;
 	};
@@ -23215,9 +23211,9 @@
 	    };
 	};
 	
-	var saveFewestGuesses = function saveFewestGuesses(repository) {
+	var saveFewestGuesses = function saveFewestGuesses(guessCount) {
 	    return function (dispatch) {
-	        var url = 'https://api.github.com/repos/' + repository;
+	        var url = 'localhost:8080/fewest-guesses';
 	        return fetch(url).then(function (response) {
 	            if (response.state < 200 || response.status >= 300) {
 	                var error = new Error(response.statusText);
@@ -23866,7 +23862,7 @@
 	      'Your guesses so far: ',
 	      props.guessSet.toString()
 	    ),
-	    props.numHotness == 'You win!' ? React.createElement(NewGameContainer, null) : React.createElement(InputContainer, null)
+	    props.numHotness == 'You win!' ? React.createElement(NewGameContainer, null) : React.createElement(InputContainer, { guessCount: props.guessCount })
 	  );
 	};
 	
@@ -23914,35 +23910,33 @@
 	* Allows user to input a guess into the game that gets dispatched to an action
 	*/
 	var InputContainer = React.createClass({
-	  displayName: 'InputContainer',
+	    displayName: 'InputContainer',
 	
-	  onGuessSubmit: function onGuessSubmit(event) {
-	    event.preventDefault();
-	    var userNum = parseInt(this.refs.userInput.value);
-	    this.props.dispatch(actions.makeGuess(userNum));
-	    // console.log(this.props.guessCount);
-	    // this.props.dispatch(
-	    //     actions.fetchDescription(this.props.guessCount)
-	    // );
-	    this.refs.userInput.value = null;
-	  },
+	    onGuessSubmit: function onGuessSubmit(event) {
+	        event.preventDefault();
+	        var userNum = parseInt(this.refs.userInput.value);
+	        this.props.dispatch(actions.makeGuess(userNum));
+	        console.log(this.props.guessCount + 1);
+	        this.props.dispatch(actions.fetchDescription(this.props.guessCount + 1));
+	        this.refs.userInput.value = null;
+	    },
 	
-	  render: function render() {
-	    return React.createElement(
-	      'div',
-	      { className: 'inputField' },
-	      React.createElement(
-	        'form',
-	        { onSubmit: this.onGuessSubmit },
-	        React.createElement('input', { type: 'text', ref: 'userInput' }),
-	        React.createElement(
-	          'button',
-	          { name: 'input-button' },
-	          'Guess'
-	        )
-	      )
-	    );
-	  }
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            { className: 'inputField' },
+	            React.createElement(
+	                'form',
+	                { onSubmit: this.onGuessSubmit },
+	                React.createElement('input', { type: 'text', ref: 'userInput' }),
+	                React.createElement(
+	                    'button',
+	                    { name: 'input-button' },
+	                    'Guess'
+	                )
+	            )
+	        );
+	    }
 	});
 	
 	/** Connect the state with the InputContainer constructor */

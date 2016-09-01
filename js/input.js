@@ -15,10 +15,10 @@ var InputContainer = React.createClass({
       event.preventDefault();
         var userNum = parseInt(this.refs.userInput.value);
         this.props.dispatch(actions.makeGuess(userNum));
-        // console.log(this.props.guessCount);
-        // this.props.dispatch(
-        //     actions.fetchDescription(this.props.guessCount)
-        // );
+        console.log(this.props.guessCount + 1);
+        this.props.dispatch(
+            actions.saveFewestGuesses(this.props.guessCount + 1)
+        );
         this.refs.userInput.value = null;
     },
 
