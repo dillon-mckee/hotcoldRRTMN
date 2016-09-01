@@ -23,13 +23,13 @@ app.post('/fewest-guesses', jsonParser, function(req, res) {
     // console.log('post workin?');
     // findOne returns an Object 
     // find returns an array
-//     SavedGame.find(function(err, guesses) {
-//         if (err) {
-//             return res.status(500).json({
-//                 message: 'Internal Server Error'
-//             });
-//         }
-//         var query = guesses;
+    SavedGame.find(function(err, result) {
+        if (err) {
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        }
+        var query = result;
 // console.log("before", guesses);
 //         if(guesses[0] == undefined) {
 //           console("are we here?");
@@ -45,15 +45,26 @@ app.post('/fewest-guesses', jsonParser, function(req, res) {
           // console.log(guesses);
 //           })
 //         }
-        if (guesses.guesses > req.body.guessCount || guesses.guesses == 0) {
-            console.log("inside", guesses);
-            SavedGame.findOneAndUpdate(query,{$set: {guesses: req.body.guessCount}}, function(err, guesses) { 
-                return res.json(guesses);
-            });
-        }
-        console.log("after", guesses);
+          // console.log(result.length);
+        if(result.length == 0){
+          console.log('Creating a new guess', result);
+          SavedGame.insert({
+            guesses: req.body.guesses
+          }, function(err, response){
+            return res.json(response)
+          });
+        };
 
-    // });
+        // if (result[0].guesses > req.body.guessCount || result[0].guesses == 0) {
+        // if (result[0].guesses > req.body.guessCount) {
+        //     console.log("updating a new guess", result);
+        //     SavedGame.findOneAndUpdate(query,{$set: {guesses: req.body.guessCount}}, function(err, guesses) { 
+        //         return res.json(result);
+        //     });
+        // }
+        console.log("after", result);
+
+    });
 });
 
 var runServer = function(callback) {
